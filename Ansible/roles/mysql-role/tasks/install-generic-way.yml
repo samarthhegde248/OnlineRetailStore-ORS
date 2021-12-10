@@ -1,0 +1,14 @@
+---
+
+#Install mysql using generic method irrespective of apt or yum
+
+- name: Install mysql package using generic method
+  become: yes
+  become_method: sudo
+  package:
+    name: 
+      - mysql-server
+      - mysql-devel
+    state: latest
+    force: yes
+    purge: yes

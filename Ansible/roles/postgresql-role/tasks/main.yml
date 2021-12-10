@@ -1,0 +1,15 @@
+---
+# tasks file for roles/postgresql-role
+
+- name: Install postgresql packages
+  include: install-generic-way.yml
+
+- name: Initialize postgresql apt
+  become: yes
+  become_method: sudo
+  include: initialize-postgresql-apt.yml
+
+- name: Create DB and user in postgresql
+  become: yes
+  become_user: postgres
+  include: createdb-postgresql.yml

@@ -1,0 +1,21 @@
+---
+# Install java using apt
+
+- name: Update apt-get
+  become: yes
+  become_method: sudo
+  apt:
+    update_cache: true
+    force_apt_get: true
+
+- name: Update repository cache and install openjdk-{{ java_version }}-jdk using apt
+  become: yes
+  become_method: sudo
+  apt:
+    pkg:
+      - "openjdk-{{ java_version }}-jdk"
+    state: latest
+    update_cache: true
+
+# - debug:
+#     msg: "openjdk-{{ java_version }}-jdk"

@@ -1,0 +1,36 @@
+---
+
+#Create database and run sql queries
+
+- name: Create app database
+  postgresql_db:
+    state: present
+    name: "{{ db_name }}"
+
+- name: Create DB user
+  postgresql_user:
+    state: present
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+
+- name: Grant DB user access to app DB
+  postgresql_privs:
+    type: database
+    database: "{{ db_name }}"
+    roles: "{{ db_user }}"
+    grant_option: no
+    privs: all
+  notify: restart postgresql
+
+# - name: Allow md5 connect for the DB user
+#   postgresql_pg_hba:
+#     dest: "~/data/pg_hba.conf"
+#     contype: host
+#     databases: all
+#     method: md5
+#     users: "{{ db_user }}"
+#     create: true
+#   notify: restart postgresql
+
+# - name: Add data to DB
+#   shell: "psql {{ dbname }} < /tmp/data.sql"

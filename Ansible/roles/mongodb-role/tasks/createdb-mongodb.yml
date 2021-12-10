@@ -1,0 +1,8 @@
+---
+# Create db in mongodb
+
+# - name: Create db in mongodb
+#   shell: mongo use testdb
+
+# - name: "Create collection {{ mongo_db_collection}}"
+#   shell: mongo db_name --eval "db.createCollection('collection_name')"

@@ -1,0 +1,8 @@
+---
+# tasks file for java-role
+
+- name: Install java
+  include: install-generic-way.yml
+
+# - debug:
+#     msg: "{{ sam_name }}"

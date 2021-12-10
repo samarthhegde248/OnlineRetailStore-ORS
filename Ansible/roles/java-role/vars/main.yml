@@ -1,0 +1,6 @@
+---
+# vars file for java-role
+
+sam_name:
+  - "samarth"
+  - surname: "Hegde"

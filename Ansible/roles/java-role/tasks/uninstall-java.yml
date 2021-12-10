@@ -1,0 +1,20 @@
+---
+# Uninstall java
+
+# - name: Uninstall java using apt
+#   become: yes
+#   become_method: sudo
+#   apt:
+#     name: "openjdk-{{ java_version }}-jre"
+#     state: absent
+#     force: yes
+#     purge: yes
+
+- name: Uninstall java using generic method
+  become: yes
+  become_method: sudo
+  package:
+    name: "openjdk-{{ java_version }}-jre"
+    state: absent
+    autoremove: yes
+    purge: yes

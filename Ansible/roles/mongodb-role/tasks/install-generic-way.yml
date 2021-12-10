@@ -1,0 +1,12 @@
+---
+
+#Install mongoDB using generic method irrespective of apt or yum
+
+- name: Install mongoDB package using generic method
+  become: yes
+  become_method: sudo
+  package:
+    name: mongodb
+    state: latest
+    force: yes
+    purge: yes

@@ -1,0 +1,10 @@
+---
+# Install java using yum
+
+- name: Update repository cache and install openjdk-{{ java_version }}-jdk using yum
+  become: yes
+  become_method: sudo
+  yum:
+    name: "openjdk-{{ java_version }}-jdk"
+    state: latest
+    update_cache: true

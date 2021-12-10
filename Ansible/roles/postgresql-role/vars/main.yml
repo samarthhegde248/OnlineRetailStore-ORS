@@ -1,0 +1,7 @@
+---
+# vars file for roles/postgresql-role
+
+ansible_ssh_pipelining: true
+db_user: postgres
+db_password: tiger
+db_name: orsdb_customers

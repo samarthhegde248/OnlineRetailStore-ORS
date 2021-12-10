@@ -1,0 +1,5 @@
+---
+# handlers file for roles/postgresql-role
+
+- name: restart postgresql
+  service: name=postgresql state=restarted

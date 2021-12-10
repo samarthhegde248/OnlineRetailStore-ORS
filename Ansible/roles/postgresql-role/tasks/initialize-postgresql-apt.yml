@@ -1,0 +1,60 @@
+---
+
+#Initialize postgresql
+- name: Collect PostgreSQL version
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_info:
+    filter: ver*
+
+- name: Find out Postgresql is initialized
+  # become: yes
+  # become_method: sudo
+  ansible.builtin.stat:
+    path: /var/lib/pgsql/data/pg_hba.conf
+  register: postgres_data
+
+# - name: Create postgres user for my app
+#   become: yes
+#   become_user: postgres
+#   postgresql_user:
+#     name: "myappuser"
+#     password: "supersecretpassword"
+
+# - name: Ensure we have access from the new user
+#   become: yes
+#   become_user: postgres
+#   postgresql_privs:
+#     db: mydatabase
+#     role: myappuser
+#     objs: ALL_IN_SCHEMA
+#     privs: SELECT,INSERT,UPDATE,DELETE
+
+# https://stackoverflow.com/questions/44104241/postgresql-error-initdb-command-not-found
+# - name: Initialize postgresql
+#   become: yes
+#   become_user: postgres
+#   command: initdb
+#   when: not postgres_data.stat.exists
+
+- name: change postgres network binding
+  lineinfile:
+    path: /etc/postgresql/12/main/postgresql.conf
+    regexp: '# listen_addresses'
+    line: "listen_addresses = '*'"
+
+- name: change postgres pg hba access
+  lineinfile:
+    path: /etc/postgresql/12/main/pg_hba.conf
+    regexp: 'host  all  all 0.0.0.0/0 md5'
+    line: 'host  all  all 0.0.0.0/0 md5'
+
+- name: Start and enable services
+  # become: yes
+  # become_method: sudo
+  service:
+    name="{{ item }}"
+    state=started
+    enabled=yes
+  with_items:
+    - postgresql

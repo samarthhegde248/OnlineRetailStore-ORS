@@ -1,0 +1,24 @@
+---
+
+#Install postgresql, psycopg2 packages
+
+- name: Install postgresql, postgresql-contrib, python3-psycopg2 using generic method
+  become: yes
+  become_method: sudo
+  package:
+    name:
+      - postgresql
+      - postgresql-contrib
+      - python3-psycopg2
+    state: latest
+    # force: yes
+    # purge: yes
+
+- name: Set psql path to /usr/lib/postgresql/12/bin/psql
+  become: yes
+  become_method: sudo
+  lineinfile:
+    path: /etc/profile
+    line: '{{ item }}'
+  with_items:
+    - "export PATH=$PATH:/usr/lib/postgresql/12/bin"

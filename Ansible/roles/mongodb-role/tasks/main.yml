@@ -1,0 +1,13 @@
+---
+# tasks file for roles/mongodb-role
+
+- name: Install mongodb
+  include: install-generic-way.yml
+
+- name: Tuning factors OS apt
+  become: yes
+  become_method: sudo
+  include: tuning-factors-apt.yml
+
+# - name: Create db for application
+#   include: createdb-mongodb.yml

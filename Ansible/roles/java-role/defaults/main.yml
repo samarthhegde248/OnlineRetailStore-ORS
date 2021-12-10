@@ -1,0 +1,4 @@
+---
+# defaults file for java-role
+
+java_version: 8

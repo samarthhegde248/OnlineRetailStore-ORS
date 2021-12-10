@@ -1,0 +1,9 @@
+- hosts: localhost
+  # debugger: always
+  vars:
+    java_version: 11
+  roles:
+    - role: java-role
+    - role: mongodb-role
+    - role: postgresql-role
+    # - role: mysql-role
