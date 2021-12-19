@@ -2,12 +2,13 @@
 FROM ubuntu:latest
 
 ARG JDK_VERSION=11
+ENV JDK_VERSION ${JDK_VERSION}
 
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
 	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
 
-RUN apt-get update && apt-get install -y openjdk-${JDK_VERSION}-jdk
+RUN apt-get update && apt-get install -y openjdk-11-jdk
 ENV JAVA_HOME /usr/lib/jvm/java-${JDK_VERSION}-openjdk-amd64
 ENV PATH $PATH:$JAVA_HOME/bin
 
@@ -21,6 +22,7 @@ ARG APP_NAME=ORS-Orders-Application
 ARG SPRING_PROFILES_ACTIVE=dev
 ARG APP_RUN_PORT=8100
 ARG LOG_FILE_PATH=/var/log/ORS
+ARG PATH_TO_ORS_APP=/usr/ORS
 ARG CLOUD_CONFIG_URI=http://localhost:8085
 ARG EUREKA_SERVER_URL=http://localhost:8761/eureka
 ARG DB_TYPE=mongodb
@@ -44,16 +46,18 @@ ENV DB_NAME ${DB_NAME}
 ENV DB_USERNAME ${DB_USERNAME}
 ENV DB_PASSWORD ${DB_PASSWORD}
 ENV KAFKA_SERVERS ${KAFKA_SERVERS}
+ENV APP_NAME ${APP_NAME}
+ENV PATH_TO_ORS_APP ${PATH_TO_ORS_APP}
 
-WORKDIR /usr/
+RUN mkdir ${PATH_TO_ORS_APP}
 
-COPY ../target/${PROJECT_NAME}-0.0.1-SNAPSHOT.jar /${APP_NAME}.jar
+WORKDIR ${PATH_TO_ORS_APP}
 
-RUN ls .
-RUN ls /var/log/
-RUN ls ${LOG_FILE_PATH}
+COPY ./target/${PROJECT_NAME}-0.0.1-SNAPSHOT.jar ${PATH_TO_ORS_APP}/${APP_NAME}.jar
 
-# CMD ["java", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-jar", "${APP_NAME}.jar"]
-CMD ["java", "-jar", "${APP_NAME}.jar"]
+RUN mkdir ${LOG_FILE_PATH}
+
+# CMD java -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} -jar ${PATH_TO_ORS_APP}/${APP_NAME}.jar
+CMD java -jar ${PATH_TO_ORS_APP}/${APP_NAME}.jar
 
 EXPOSE ${APP_RUN_PORT}
