@@ -26,12 +26,12 @@ ARG PATH_TO_ORS_APP=/usr/ORS
 ARG CLOUD_CONFIG_URI=http://config-server:8085
 ARG EUREKA_SERVER_URL=http://eureka-discovery-server:8761/eureka
 ARG DB_TYPE=mongodb
-ARG DB_HOST=localhost
+ARG DB_HOST=mongodb
 ARG DB_PORT=27017
 ARG DB_NAME=orsdb_orders
 ARG DB_USERNAME=
 ARG DB_PASSWORD=
-ARG KAFKA_SERVERS=localhost:9092
+ARG KAFKA_SERVERS=kafka:9092
 
 # VOLUME [ "/data" ]
 
