@@ -1,6 +1,6 @@
 FROM bitnami/kafka:latest
 
-ENV ALLOW_PLAINTEXT_LISTENER="no" \
+ENV ALLOW_PLAINTEXT_LISTENER="yes" \
     BITNAMI_APP_NAME="kafka" \
     KAFKA_BROKER_PASSWORD="bitnami" \
     KAFKA_BROKER_USER="user" \
