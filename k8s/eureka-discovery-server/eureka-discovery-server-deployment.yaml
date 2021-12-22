@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-discovery-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ors: eureka-discovery-server-deployment
+  template:
+    metadata:
+      labels:
+        ors: eureka-discovery-server-deployment
+    spec:
+      containers:
+        - name: eureka-discovery-server
+          image: eureka-discovery-server/ors
+          ports:
+            - containerPort: 8761
+          env:
+            - name: SERVER_PORT
+              value: '8761'
+            - name: LOG_FILE_PATH
+              value: /var/log/ORS
+            - name: CLOUD_CONFIG_URI
+              value: http://config-server:8085
+            - name: APP_NAME
+              value: ORS-Eureka-Discovery-Server
+            - name: PATH_TO_ORS_APP
+              value: /usr/ORS

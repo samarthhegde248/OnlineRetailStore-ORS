@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-eureka-client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ors: edge-eureka-client-deployment
+  template:
+    metadata:
+      labels:
+        ors: edge-eureka-client-deployment
+    spec:
+      containers:
+        - name: edge-eureka-client
+          image: edge-eureka-client/ors
+          ports:
+            - containerPort: 8088
+          env:
+            - name: SERVER_PORT
+              value: '8088'
+            - name: LOG_FILE_PATH
+              value: /var/log/ORS
+            - name: CLOUD_CONFIG_URI
+              value: http://config-server:8085
+            - name: EUREKA_SERVER_URL
+              value: http://eureka-discovery-server:8761/eureka
+            - name: APP_NAME
+              value: ORS-Edge-Eureka-Client
+            - name: PATH_TO_ORS_APP
+              value: /usr/ORS

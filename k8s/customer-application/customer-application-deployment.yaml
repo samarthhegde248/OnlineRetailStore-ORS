@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-application-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ors: customer-application-deployment
+  template:
+    metadata:
+      labels:
+        ors: customer-application-deployment
+    spec:
+      containers:
+        - name: customer-application
+          image: customer-application/ors
+          ports:
+            - containerPort: 8095
+          env:
+            - name: SERVER_PORT
+              value: '8095'
+            - name: LOG_FILE_PATH
+              value: /var/log/ORS
+            - name: CLOUD_CONFIG_URI
+              value: http://config-server:8085
+            - name: EUREKA_SERVER_URL
+              value: http://eureka-discovery-server:8761/eureka
+            - name: APP_NAME
+              value: ORS-Customer-Application
+            - name: PATH_TO_ORS_APP
+              value: /usr/ORS
+            - name: DB_TYPE
+              value: postgresql
+            - name: DB_HOST
+              value: localhost
+            - name: DB_PORT
+              value: '5432'
+            - name: DB_NAME
+              value: orsdb_customers
+            - name: DB_USERNAME
+              value: postgres
+            - name: DB_PASSWORD
+              value: tiger

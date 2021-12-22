@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeper-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ors: zookeeper
+  template:
+    metadata:
+      labels:
+        ors: zookeeper
+    spec:
+      containers:
+        - name: zookeeper
+          image: zookeeper/ors
+          ports:
+            - containerPort: 2181
+          env:
+            - name: ZOO_ENABLE_AUTH
+              value: yes
+            - name: ZOO_SERVER_USERS
+              value: zookeeper
+            - name: ZOO_SERVER_PASSWORDS
+              value: zookeeper
+
+---
+apiVersion: v1
+kind: ClusterIP
+metadata:
+  name: zookeeper-clusterip-service
+  spec:
+    type: ClusterIP
+    selector:
+      ors: zookeeper
+      ports:
+        - port: 2181
+          targetPort: 2181

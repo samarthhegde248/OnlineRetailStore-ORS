@@ -1,0 +1,12 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: config-server-pod
+#   labels:
+#     ors: config-server
+# spec:
+#   containers:
+#     - name: config-server
+#       image: config-server/ors:latest
+#       ports:
+#         - containerPort: 8085

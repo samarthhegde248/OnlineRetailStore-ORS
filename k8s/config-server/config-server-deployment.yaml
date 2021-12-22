@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ors: config-server-deployment
+  template:
+    metadata:
+      labels:
+        ors: config-server-deployment
+    spec:
+      containers:
+        - name: config-server
+          image: config-server/ors
+          ports:
+            - containerPort: 8085
+          env:
+            - name: SERVER_PORT
+              value: '8085'
+            - name: GIT_BRANCH
+              value: main
+            - name: LOG_FILE_PATH
+              value: /var/log/ORS
+            - name: CONFIG_GIT_URL
+              value: https://github.com/samarthhegde248/ORS-Config-Server.git
+            - name: APP_NAME
+              value: ORS-Config-Server
+            - name: PATH_TO_ORS_APP
+              value: /usr/ORS
+          #   - name: password
+          #     valueFrom:
+          #       secretKeyRef:
+          #         name: secret_name
+          #         key: key

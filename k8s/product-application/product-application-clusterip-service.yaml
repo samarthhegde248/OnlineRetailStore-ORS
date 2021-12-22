@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ClusterIP
+metadata:
+  name: product-application-clusterip-service
+  spec:
+    type: ClusterIP
+    selector:
+      ors: product-application-deployment
+      ports:
+        - port: 8100
+          targetPort: 8100

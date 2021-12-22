@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ClusterIP
+metadata:
+  name: customer-application-clusterip-service
+  spec:
+    type: ClusterIP
+    selector:
+      ors: customer-application-deployment
+      ports:
+        - port: 8095
+          targetPort: 8095

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ors: postgresql
+  template:
+    metadata:
+      labels:
+        ors: postgresql
+    spec:
+      containers:
+        - name: postgresql
+          image: postgresql/ors
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: tiger
+            - name: POSTGRES_DB
+              value: orsdb_customers
+
+---
+apiVersion: v1
+kind: ClusterIP
+metadata:
+  name: postgresql-clusterip-service
+  spec:
+    type: ClusterIP
+    selector:
+      ors: postgresql
+      ports:
+        - port: 5432
+          targetPort: 5432
