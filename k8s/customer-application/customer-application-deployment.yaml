@@ -33,7 +33,7 @@ spec:
             - name: DB_TYPE
               value: postgresql
             - name: DB_HOST
-              value: localhost
+              value: postgresql
             - name: DB_PORT
               value: '5432'
             - name: DB_NAME

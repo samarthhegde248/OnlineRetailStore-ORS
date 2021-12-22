@@ -33,14 +33,14 @@ spec:
             - name: DB_TYPE
               value: mongodb
             - name: DB_HOST
-              value: localhost
+              value: mongodb
             - name: DB_PORT
               value: '27017'
             - name: DB_NAME
               value: orsdb_orders
             - name: DB_USERNAME
-              value:
+              value: ''
             - name: DB_PASSWORD
-              value:
+              value: ''
             - name: KAFKA_SERVERS
-              value: localhost:9092
+              value: kafka:9092
