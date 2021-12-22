@@ -27,13 +27,13 @@ spec:
 
 ---
 apiVersion: v1
-kind: ClusterIP
+kind: Service
 metadata:
   name: zookeeper-clusterip-service
   spec:
     type: ClusterIP
     selector:
       ors: zookeeper
-      ports:
-        - port: 2181
-          targetPort: 2181
+    ports:
+      - port: 2181
+        targetPort: 2181

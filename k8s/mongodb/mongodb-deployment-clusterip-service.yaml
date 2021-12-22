@@ -20,13 +20,13 @@ spec:
 
 ---
 apiVersion: v1
-kind: ClusterIP
+kind: Service
 metadata:
   name: mongodb-clusterip-service
   spec:
     type: ClusterIP
     selector:
       ors: mongodb
-      ports:
-        - port: 27017
-          targetPort: 27017
+    ports:
+      - port: 27017
+        targetPort: 27017

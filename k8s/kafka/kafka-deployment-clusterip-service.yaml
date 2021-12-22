@@ -47,13 +47,13 @@ spec:
 
 ---
 apiVersion: v1
-kind: ClusterIP
+kind: Service
 metadata:
   name: kafka-clusterip-service
   spec:
     type: ClusterIP
     selector:
       ors: kafka
-      ports:
-        - port: 9092
-          targetPort: 9092
+    ports:
+      - port: 9092
+        targetPort: 9092

@@ -1,11 +1,11 @@
 apiVersion: v1
-kind: ClusterIP
+kind: Service
 metadata:
   name: edge-eureka-client-clusterip-service
   spec:
     type: ClusterIP
     selector:
       ors: edge-eureka-client-deployment
-      ports:
-        - port: 8088
-          targetPort: 8088
+    ports:
+      - port: 8088
+        targetPort: 8088

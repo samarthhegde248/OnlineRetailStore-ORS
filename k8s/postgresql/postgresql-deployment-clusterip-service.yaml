@@ -27,13 +27,13 @@ spec:
 
 ---
 apiVersion: v1
-kind: ClusterIP
+kind: Service
 metadata:
   name: postgresql-clusterip-service
   spec:
     type: ClusterIP
     selector:
       ors: postgresql
-      ports:
-        - port: 5432
-          targetPort: 5432
+    ports:
+      - port: 5432
+        targetPort: 5432
