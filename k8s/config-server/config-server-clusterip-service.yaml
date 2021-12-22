@@ -2,10 +2,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: config-server-clusterip-service
-  spec:
-    type: ClusterIP
-    selector:
-      ors: config-server-deployment
-    ports:
-      - port: 8085
-        targetPort: 8085
+spec:
+  type: ClusterIP
+  selector:
+    ors: config-server-deployment
+  ports:
+    - port: 8085
+      targetPort: 8085
