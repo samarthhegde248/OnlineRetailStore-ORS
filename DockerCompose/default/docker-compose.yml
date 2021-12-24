@@ -1,0 +1,155 @@
+version: "3.8"
+
+services:
+  config-server:
+    image: config-server/ors:latest
+    mem_limit: 700m
+    ports:
+      - "8085:8085"
+    networks:
+      - ors-net
+
+  eureka-discovery-server:
+    image: eureka-discovery-server/ors:latest
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - ors-net
+    depends_on:
+      - config-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_APPLICATION_NAME: ORS-Eureka-Discovery-Server
+      SPRING_PROFILES_ACTIVE: default
+
+  postgresql:
+    image: postgresql/ors:latest
+    mem_limit: 700m
+    ports:
+      - "5432:5432"
+    networks:
+      - ors-net
+
+  mongodb:
+    image: mongodb/ors:latest
+    mem_limit: 700m
+    ports:
+      - "27017:27017"
+    networks:
+      - ors-net
+
+  zookeeper:
+    image: zookeeper/ors:latest
+    mem_limit: 700m
+    ports:
+      - "2181:2181"
+    networks:
+      - ors-net
+
+  kafka:
+    image: kafka/ors:latest
+    mem_limit: 700m
+    ports:
+      - "9092:9092"
+    networks:
+      - ors-net
+    depends_on:
+      - zookeeper
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  customer-application:
+    image: customer-application/ors:latest
+    mem_limit: 700m
+    ports:
+      - "8095:8095"
+    networks:
+      - ors-net
+    depends_on:
+      - config-server
+      - postgresql
+      - eureka-discovery-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+
+  product-application:
+    image: product-applcation/ors:latest
+    mem_limit: 700m
+    ports:
+      - "8090:8090"
+    networks:
+      - ors-net
+    depends_on:
+      - config-server
+      - mongodb
+      - eureka-discovery-server
+      - kafka
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+
+  orders-application:
+    image: orders-application/ors:latest
+    mem_limit: 700m
+    ports:
+      - "8100:8100"
+    networks:
+      - ors-net
+    depends_on:
+      - config-server
+      - mongodb
+      - kafka
+      - eureka-discovery-server
+      - product-application
+      - customer-application
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+
+  edge-eureka-client:
+    image: edge-eureka-client/ors:latest
+    mem_limit: 700m
+    ports:
+      - "8088:8088"
+    networks:
+      - ors-net
+    depends_on:
+      - config-server
+      - eureka-discovery-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+
+networks:
+  ors-net:
