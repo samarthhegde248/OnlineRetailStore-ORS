@@ -32,7 +32,7 @@ ARG DB_NAME=orsdb_orders
 ARG DB_USERNAME=
 ARG DB_PASSWORD=
 ARG KAFKA_SERVERS=kafka:9092
-ARG ZIPKIN_URL=http://localhost:9411/
+ARG ZIPKIN_URL=http://zipkin:9411/
 
 # VOLUME [ "/data" ]
 

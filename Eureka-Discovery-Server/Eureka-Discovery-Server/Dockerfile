@@ -24,7 +24,7 @@ ARG APP_RUN_PORT=8761
 ARG LOG_FILE_PATH=/var/log/ORS
 ARG PATH_TO_ORS_APP=/usr/ORS
 ARG CLOUD_CONFIG_URI=http://config-server:8085
-ARG ZIPKIN_URL=http://localhost:9411/
+ARG ZIPKIN_URL=http://zipkin:9411/
 
 # VOLUME [ "/data" ]
 

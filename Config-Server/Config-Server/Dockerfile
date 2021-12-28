@@ -25,7 +25,7 @@ ARG CONFIG_GIT_URL=https://github.com/samarthhegde248/ORS-Config-Server.git
 ARG GIT_BRANCH=main
 ARG LOG_FILE_PATH=/var/log/ORS
 ARG PATH_TO_ORS_APP=/usr/ORS
-ARG ZIPKIN_URL=http://localhost:9411/
+ARG ZIPKIN_URL=http://zipkin:9411/
 
 # VOLUME [ "/data" ]
 

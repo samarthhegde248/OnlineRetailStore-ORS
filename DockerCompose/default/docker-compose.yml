@@ -1,6 +1,14 @@
 version: "3.8"
 
 services:
+  zipkin:
+    image: openzipkin/zipkin
+    mem_limit: 700m
+    ports:
+      - "9411:9411"
+    networks:
+      - ors-net
+
   config-server:
     image: config-server/ors:latest
     mem_limit: 700m
@@ -8,6 +16,8 @@ services:
       - "8085:8085"
     networks:
       - ors-net
+    depends_on:
+      - zipkin
 
   eureka-discovery-server:
     image: eureka-discovery-server/ors:latest
@@ -17,6 +27,7 @@ services:
     networks:
       - ors-net
     depends_on:
+      - zipkin
       - config-server
     deploy:
       restart_policy:
@@ -76,6 +87,7 @@ services:
     networks:
       - ors-net
     depends_on:
+      - zipkin
       - config-server
       - postgresql
       - eureka-discovery-server
@@ -96,6 +108,7 @@ services:
     networks:
       - ors-net
     depends_on:
+      - zipkin
       - config-server
       - mongodb
       - eureka-discovery-server
@@ -117,6 +130,7 @@ services:
     networks:
       - ors-net
     depends_on:
+      - zipkin
       - config-server
       - mongodb
       - kafka
@@ -140,6 +154,7 @@ services:
     networks:
       - ors-net
     depends_on:
+      - zipkin
       - config-server
       - eureka-discovery-server
       - product-application

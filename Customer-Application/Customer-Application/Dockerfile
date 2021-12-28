@@ -31,7 +31,7 @@ ARG DB_PORT=5432
 ARG DB_NAME=orsdb_customers
 ARG DB_USERNAME=postgres
 ARG DB_PASSWORD=tiger
-ARG ZIPKIN_URL=http://localhost:9411/
+ARG ZIPKIN_URL=http://zipkin:9411/
 
 # VOLUME [ "/data" ]
 
