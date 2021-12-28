@@ -142,6 +142,9 @@ services:
     depends_on:
       - config-server
       - eureka-discovery-server
+      - product-application
+      - customer-application
+      - orders-application
     deploy:
       restart_policy:
         condition: on-failure

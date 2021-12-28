@@ -2,6 +2,7 @@ package com.ORS.OrdersApplication.service;
 
 import java.util.List;
 
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ORS.OrdersApplication.model.customers.AddressVO;
 import com.ORS.OrdersApplication.model.customers.CustomersVO;
 
-
+//@FeignClient("ORS-Customer-Application")
 public interface CustomersClientService {
 final static String PREFIX = "/customers";
 	
