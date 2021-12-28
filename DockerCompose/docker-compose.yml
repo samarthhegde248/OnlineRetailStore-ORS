@@ -101,7 +101,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   product-application:
-    image: product-application/ors:latest
+    image: product-applcation/ors:latest
     mem_limit: 700m
     ports:
       - "8090:8090"
