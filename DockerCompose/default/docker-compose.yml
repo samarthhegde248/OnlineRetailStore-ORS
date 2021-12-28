@@ -10,7 +10,7 @@ services:
       - ors-net
 
   config-server:
-    image: config-server/ors:latest
+    image: samarthhegde24/config-server:latest
     mem_limit: 700m
     ports:
       - "8085:8085"
@@ -20,7 +20,7 @@ services:
       - zipkin
 
   eureka-discovery-server:
-    image: eureka-discovery-server/ors:latest
+    image: samarthhegde24/eureka-discovery-server:latest
     mem_limit: 700m
     ports:
       - "8761:8761"
@@ -40,7 +40,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   postgresql:
-    image: postgresql/ors:latest
+    image: samarthhegde24/postgresql:latest
     mem_limit: 700m
     ports:
       - "5432:5432"
@@ -48,7 +48,7 @@ services:
       - ors-net
 
   mongodb:
-    image: mongodb/ors:latest
+    image: samarthhegde24/mongodb:latest
     mem_limit: 700m
     ports:
       - "27017:27017"
@@ -56,7 +56,7 @@ services:
       - ors-net
 
   zookeeper:
-    image: zookeeper/ors:latest
+    image: samarthhegde24/zookeeper:latest
     mem_limit: 700m
     ports:
       - "2181:2181"
@@ -80,7 +80,7 @@ services:
         window: 120s
 
   customer-application:
-    image: customer-application/ors:latest
+    image: samarthhegde24/customer-application:latest
     mem_limit: 700m
     ports:
       - "8095:8095"
@@ -101,7 +101,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   product-application:
-    image: product-applcation/ors:latest
+    image: samarthhegde24/product-applcation:latest
     mem_limit: 700m
     ports:
       - "8090:8090"
@@ -123,7 +123,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   orders-application:
-    image: orders-application/ors:latest
+    image: samarthhegde24/orders-application:latest
     mem_limit: 700m
     ports:
       - "8100:8100"
@@ -147,7 +147,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   edge-eureka-client:
-    image: edge-eureka-client/ors:latest
+    image: samarthhegde24/edge-eureka-client:latest
     mem_limit: 700m
     ports:
       - "8088:8088"
