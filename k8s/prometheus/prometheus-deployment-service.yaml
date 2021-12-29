@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ors: prometheus
+  template:
+    metadata:
+      labels:
+        ors: prometheus
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus:latest
+          ports:
+            - containerPort: 9090
+          volumes:
+            - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service
+spec:
+  type: LoadBalancer
+  selector:
+    ors: prometheus
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090

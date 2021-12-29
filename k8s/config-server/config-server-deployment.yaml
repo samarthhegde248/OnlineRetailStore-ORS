@@ -22,14 +22,28 @@ spec:
               value: '8085'
             - name: GIT_BRANCH
               value: main
-            - name: LOG_FILE_PATH
-              value: /var/log/ORS
             - name: CONFIG_GIT_URL
-              value: https://github.com/samarthhegde248/ORS-Config-Server.git
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: CONFIG_GIT_URL
             - name: APP_NAME
               value: ORS-Config-Server
+            - name: LOG_FILE_PATH
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: LOG_FILE_PATH
             - name: PATH_TO_ORS_APP
-              value: /usr/ORS
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: PATH_TO_ORS_APP
+            - name: ZIPKIN_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: ZIPKIN_URL
           #   - name: password
           #     valueFrom:
           #       secretKeyRef:

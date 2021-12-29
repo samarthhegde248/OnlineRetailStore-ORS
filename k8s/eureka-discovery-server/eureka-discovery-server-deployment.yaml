@@ -20,11 +20,25 @@ spec:
           env:
             - name: SERVER_PORT
               value: '8761'
-            - name: LOG_FILE_PATH
-              value: /var/log/ORS
-            - name: CLOUD_CONFIG_URI
-              value: http://config-server:8085
             - name: APP_NAME
               value: ORS-Eureka-Discovery-Server
+            - name: CLOUD_CONFIG_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: CLOUD_CONFIG_URI
+            - name: LOG_FILE_PATH
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: LOG_FILE_PATH
             - name: PATH_TO_ORS_APP
-              value: /usr/ORS
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: PATH_TO_ORS_APP
+            - name: ZIPKIN_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: ZIPKIN_URL

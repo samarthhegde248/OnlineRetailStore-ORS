@@ -20,27 +20,65 @@ spec:
           env:
             - name: SERVER_PORT
               value: '8100'
-            - name: LOG_FILE_PATH
-              value: /var/log/ORS
-            - name: CLOUD_CONFIG_URI
-              value: http://config-server:8085
-            - name: EUREKA_SERVER_URL
-              value: http://eureka-discovery-server:8761/eureka
             - name: APP_NAME
               value: ORS-Orders-Application
-            - name: PATH_TO_ORS_APP
-              value: /usr/ORS
-            - name: DB_TYPE
-              value: mongodb
-            - name: DB_HOST
-              value: mongodb
-            - name: DB_PORT
-              value: '27017'
             - name: DB_NAME
-              value: orsdb_orders
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: ORDERS_MONGO_DB_NAME
+            - name: DB_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: MONGO_DB_TYPE
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: MONGO_DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: MONGO_DB_PORT
             - name: DB_USERNAME
-              value: ''
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: MONGO_DB_USERNAME
             - name: DB_PASSWORD
-              value: ''
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: MONGO_DB_PASSWORD
             - name: KAFKA_SERVERS
-              value: kafka:9092
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: KAFKA_SERVERS
+            - name: CLOUD_CONFIG_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: CLOUD_CONFIG_URI
+            - name: EUREKA_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: EUREKA_SERVER_URL
+            - name: LOG_FILE_PATH
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: LOG_FILE_PATH
+            - name: PATH_TO_ORS_APP
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: PATH_TO_ORS_APP
+            - name: ZIPKIN_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: ZIPKIN_URL

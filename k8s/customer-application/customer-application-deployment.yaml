@@ -20,25 +20,60 @@ spec:
           env:
             - name: SERVER_PORT
               value: '8095'
-            - name: LOG_FILE_PATH
-              value: /var/log/ORS
-            - name: CLOUD_CONFIG_URI
-              value: http://config-server:8085
-            - name: EUREKA_SERVER_URL
-              value: http://eureka-discovery-server:8761/eureka
             - name: APP_NAME
               value: ORS-Customer-Application
-            - name: PATH_TO_ORS_APP
-              value: /usr/ORS
-            - name: DB_TYPE
-              value: postgresql
-            - name: DB_HOST
-              value: postgresql
-            - name: DB_PORT
-              value: '5432'
             - name: DB_NAME
-              value: orsdb_customers
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: CUSTOMERS_POSTGRESQL_DB_NAME
+            - name: CLOUD_CONFIG_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: CLOUD_CONFIG_URI
+            - name: EUREKA_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: EUREKA_SERVER_URL
+            - name: LOG_FILE_PATH
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: LOG_FILE_PATH
+            - name: PATH_TO_ORS_APP
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: PATH_TO_ORS_APP
+            - name: DB_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: POSTGRESQL_DB_TYPE
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: POSTGRESQL_DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: POSTGRESQL_DB_PORT
             - name: DB_USERNAME
-              value: postgres
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: POSTGRESQL_DB_USERNAME
             - name: DB_PASSWORD
-              value: tiger
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: POSTGRESQL_DB_PASSWORD
+            - name: ZIPKIN_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: ZIPKIN_URL

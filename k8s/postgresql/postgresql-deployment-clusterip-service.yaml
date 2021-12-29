@@ -19,11 +19,20 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRES_USER
-              value: postgres
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: POSTGRESQL_DB_USERNAME
             - name: POSTGRES_PASSWORD
-              value: tiger
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: POSTGRESQL_DB_PASSWORD
             - name: POSTGRES_DB
-              value: orsdb_customers
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: CUSTOMERS_POSTGRESQL_DB_NAME
 
 ---
 apiVersion: v1

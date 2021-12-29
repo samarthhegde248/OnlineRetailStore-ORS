@@ -21,9 +21,15 @@ spec:
             - name: ZOO_ENABLE_AUTH
               value: 'yes'
             - name: ZOO_SERVER_USERS
-              value: zookeeper
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: ZOO_SERVER_USERS
             - name: ZOO_SERVER_PASSWORDS
-              value: zookeeper
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: ZOO_SERVER_PASSWORDS
 
 ---
 apiVersion: v1
