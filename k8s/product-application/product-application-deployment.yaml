@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: product-application
-          image: product-application/ors
+          image: samarthhegde24/product-application:latest
           ports:
             - containerPort: 8090
           env:

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: edge-eureka-client
-          image: edge-eureka-client/ors
+          image: samarthhegde24/edge-eureka-client:latest
           ports:
             - containerPort: 8088
           env:

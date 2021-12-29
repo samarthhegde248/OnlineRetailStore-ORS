@@ -31,7 +31,7 @@ services:
       - ors-net
 
   config-server:
-    image: config-server/ors:latest
+    image: samarthhegde24/config-server:latest
     mem_limit: 700m
     ports:
       - "8085:8085"
@@ -41,7 +41,7 @@ services:
       - zipkin
 
   eureka-discovery-server:
-    image: eureka-discovery-server/ors:latest
+    image: samarthhegde24/eureka-discovery-server:latest
     mem_limit: 700m
     ports:
       - "8761:8761"
@@ -61,15 +61,19 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   postgresql:
-    image: postgresql/ors:latest
+    image: postgres:14
     mem_limit: 700m
     ports:
       - "5432:5432"
     networks:
       - ors-net
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "tiger"
+      POSTGRES_DB: "orsdb_customers"
 
   mongodb:
-    image: mongodb/ors:latest
+    image: mongo:5-focal
     mem_limit: 700m
     ports:
       - "27017:27017"
@@ -77,15 +81,19 @@ services:
       - ors-net
 
   zookeeper:
-    image: zookeeper/ors:latest
+    image: bitnami/zookeeper:latest
     mem_limit: 700m
     ports:
       - "2181:2181"
     networks:
       - ors-net
+    environment:
+      ZOO_ENABLE_AUTH: "yes"
+      ZOO_SERVER_USERS: "zookeeper"
+      ZOO_SERVER_PASSWORDS: "zookeeper"
 
   kafka:
-    image: kafka/ors:latest
+    image: bitnami/kafka:latest
     mem_limit: 700m
     ports:
       - "9092:9092"
@@ -99,9 +107,23 @@ services:
         delay: 5s
         max_attempts: 3
         window: 120s
+    environment:
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+      BITNAMI_APP_NAME: "kafka"
+      KAFKA_BROKER_PASSWORD: "bitnami"
+      KAFKA_BROKER_USER: "user"
+      KAFKA_CERTIFICATE_PASSWORD: ""
+      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://:9092"
+      KAFKA_CFG_LISTENERS: "PLAINTEXT://:9092"
+      KAFKA_CFG_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_INTER_BROKER_PASSWORD: "bitnami"
+      KAFKA_INTER_BROKER_USER: "admin"
+      KAFKA_PORT_NUMBER: "9092"
+      KAFKA_ZOOKEEPER_PASSWORD: "zookeeper"
+      KAFKA_ZOOKEEPER_USER: "zookeeper"
 
   customer-application:
-    image: customer-application/ors:latest
+    image: samarthhegde24/customer-application:latest
     mem_limit: 700m
     ports:
       - "8095:8095"
@@ -122,7 +144,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   product-application:
-    image: product-application/ors:latest
+    image: samarthhegde24/product-application:latest
     mem_limit: 700m
     ports:
       - "8090:8090"
@@ -144,7 +166,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   orders-application:
-    image: orders-application/ors:latest
+    image: samarthhegde24/orders-application:latest
     mem_limit: 700m
     ports:
       - "8100:8100"
@@ -168,7 +190,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   edge-eureka-client:
-    image: edge-eureka-client/ors:latest
+    image: samarthhegde24/edge-eureka-client:latest
     mem_limit: 700m
     ports:
       - "8088:8088"

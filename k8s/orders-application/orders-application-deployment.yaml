@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: orders-application
-          image: orders-application/ors
+          image: samarthhegde24/orders-application:latest
           ports:
             - containerPort: 8100
           env:
