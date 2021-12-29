@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: kafka
-          image: kafka/ors
+          image: bitnami/kafka:latest
           ports:
             - containerPort: 9092
           env:

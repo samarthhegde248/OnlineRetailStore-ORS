@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: zookeeper
-          image: zookeeper/ors
+          image: bitnami/zookeeper:latest
           ports:
             - containerPort: 2181
           env:
