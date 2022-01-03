@@ -17,8 +17,13 @@ spec:
           image: prom/prometheus:latest
           ports:
             - containerPort: 9090
-          volumes:
-            - ./prometheus.yml:/etc/prometheus/prometheus.yml
+          volumeMounts:
+            - mountPath: /etc/prometheus/prometheus.yml
+              name: prometheus-vol
+      volumes:
+        - name: prometheus-vol
+          hostPath:
+            path: ./prometheus.yml
 
 ---
 apiVersion: v1
