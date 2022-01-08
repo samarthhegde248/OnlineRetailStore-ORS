@@ -24,6 +24,7 @@ spec:
         - name: prometheus-vol
           hostPath:
             path: ./prometheus.yml
+            type: File
 
 ---
 apiVersion: v1

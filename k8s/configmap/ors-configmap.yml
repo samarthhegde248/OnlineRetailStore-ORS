@@ -21,6 +21,8 @@ data:
   POSTGRESQL_DB_PASSWORD: tiger
   ZOO_SERVER_USERS: zookeeper
   ZOO_SERVER_PASSWORDS: zookeeper
+  ZOO_CLIENT_USER: zookeeper
+  ZOO_CLIENT_PASSWORD: zookeeper
   KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper-clusterip-service:2181
   MONGO_DB_TYPE: mongodb
   MONGO_DB_HOST: mongodb-clusterip-service

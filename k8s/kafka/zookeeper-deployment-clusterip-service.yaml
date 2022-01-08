@@ -30,6 +30,16 @@ spec:
                 configMapKeyRef:
                   name: ors-configmap
                   key: ZOO_SERVER_PASSWORDS
+            - name: ZOO_CLIENT_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: ZOO_CLIENT_USER
+            - name: ZOO_CLIENT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: ors-configmap
+                  key: ZOO_CLIENT_PASSWORD
 
 ---
 apiVersion: v1
