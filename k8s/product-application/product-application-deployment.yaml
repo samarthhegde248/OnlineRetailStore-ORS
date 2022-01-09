@@ -21,7 +21,7 @@ spec:
             - name: SERVER_PORT
               value: '8090'
             - name: APP_NAME
-              value: ORS-Orders-Application
+              value: ORS-Product-Application
             - name: DB_NAME
               valueFrom:
                 configMapKeyRef:
