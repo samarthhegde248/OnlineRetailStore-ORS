@@ -91,6 +91,13 @@ services:
       ZOO_ENABLE_AUTH: "yes"
       ZOO_SERVER_USERS: "zookeeper"
       ZOO_SERVER_PASSWORDS: "zookeeper"
+      ZOO_CLIENT_USER: "zookeeper"
+      ZOO_CLIENT_PASSWORD: "zookeeper"
+      ZOO_PORT_NUMBER: "2181"
+      ZOO_LISTEN_ALLIPS_ENABLED: "yes"
+      ZOO_SERVER_ID: "1"
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+      ZOO_SERVERS: "server.1=zookeeper:2888:3888"
 
   kafka:
     image: bitnami/kafka:latest
@@ -121,6 +128,9 @@ services:
       KAFKA_PORT_NUMBER: "9092"
       KAFKA_ZOOKEEPER_PASSWORD: "zookeeper"
       KAFKA_ZOOKEEPER_USER: "zookeeper"
+      KAFKA_ZOOKEEPER_PROTOCOL: "SASL"
+      KAFKA_CLIENT_USERS: "zookeeper"
+      KAFKA_CLIENT_PASSWORDS: "zookeeper"
 
   customer-application:
     image: samarthhegde24/customer-application:latest
