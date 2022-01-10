@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: eureka-discovery-server-clusterip-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     ors: eureka-discovery-server-deployment
   ports:
-    - port: 8761
+    - protocol: TCP
+      port: 8761
       targetPort: 8761
