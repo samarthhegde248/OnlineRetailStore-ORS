@@ -40,6 +40,16 @@ spec:
                 configMapKeyRef:
                   name: ors-configmap
                   key: ZOO_CLIENT_PASSWORD
+            - name: ZOO_LISTEN_ALLIPS_ENABLED
+              value: "yes"
+            - name: ZOO_SERVER_ID
+              value: "1"
+            - name: ALLOW_ANONYMOUS_LOGIN
+              value: "yes"
+            - name: ZOO_PORT_NUMBER
+              value: "2181"
+            - name: ZOO_SERVERS
+              value: "server.1=zookeeper-clusterip-service:2888:3888"
 
 ---
 apiVersion: v1
