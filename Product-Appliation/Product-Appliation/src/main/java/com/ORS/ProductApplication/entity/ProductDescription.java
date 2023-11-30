@@ -1,6 +1,6 @@
 package com.ORS.ProductApplication.entity;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 public class ProductDescription {
 	@NotNull(message="Product's Description definition field must not be null")

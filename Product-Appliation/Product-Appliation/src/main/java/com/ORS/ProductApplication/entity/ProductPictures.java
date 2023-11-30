@@ -1,11 +1,9 @@
 package com.ORS.ProductApplication.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import jakarta.validation.constraints.NotNull;
 
 @Document(collection= "products_pictures")
 public class ProductPictures {
