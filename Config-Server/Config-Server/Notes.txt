@@ -1,0 +1,3 @@
+To test the running config server you can access the property files with below url
+Syntax: http://<server_host>:<port>/<properties_file_name_in_git>/<profile>
+Example : http://localhost:8085/ORS-Eureka-Discovery-Server/default
